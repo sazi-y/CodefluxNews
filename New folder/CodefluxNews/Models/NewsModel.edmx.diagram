@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3888afbb52df4927b208d0e2e943d3d7" Name="Diagram1">
+        <EntityTypeShape EntityType="NewsDBModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Admin" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.AspNetRole" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.AspNetUser" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.Country" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.NewsArticle" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.NewsCategory" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.NewsFeed" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.NewsProvider" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="NewsDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsProvider_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsArticle_NewsProvider" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsFeed_NewsCatergory" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsFeed_NewsProvider" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsDBModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NewsDBModel.ParentCategory" Width="1.5" PointX="3.75" PointY="1" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsCategory_ParentCategory" />
+        <AssociationConnector Association="NewsDBModel.FK_NewsArticle_NewsCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

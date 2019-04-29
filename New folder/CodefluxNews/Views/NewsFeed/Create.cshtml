@@ -1,0 +1,64 @@
+﻿@model CodefluxNews.Models.NewsFeed
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Add News Feed</h4>
+
+@using (Html.BeginForm("Create", "NewsFeed", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Select Provider", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("ProviderId", new SelectList(ViewBag.Provider as System.Collections.IEnumerable, "ProviderId", "Name"), "--Select News Provider--", new { @class = "form-control", @id = "ddlProvider" })
+            @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Rss Url", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.RssUrl, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.RssUrl, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Select Category", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CategoryId", new SelectList(ViewBag.Category as System.Collections.IEnumerable, "CategoryId", "CategoryName"), "--Select Category--", new { @class = "form-control", @id = "ddlCategory" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Picture" id="Picture" class="form-control" /><br><br>
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

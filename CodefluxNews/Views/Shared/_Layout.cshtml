@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Codeflux News
+    </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+   
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand" href="@Url.Action("Index","Home",new { })">
+
+            <img src="~/Content/Codeflux logo.png" alt="CodeFlux Logo" />
+        </a>
+
+        @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+
+        </button>*@
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <div class="float-right">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","Home",new { })">Home</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","NewsArticle",new { })">News Article<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","NewsProvider",new { })">News Provider<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","NewsFeed",new { })">News Feed<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","Country",new { })">Country<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Index","Category",new { })">Sub-Category<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("ParentList","Category",new { })">Category<span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a class="nav-link" href="@Url.Action("Register","Account",new { })">Add Admin<span class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+
+            </div>
+            @Html.Partial("_LoginPartial1", null)
+        </div>
+      
+    </nav>
+
+    <div class="container body-content px-0">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Codeflux</p>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

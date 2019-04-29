@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>                                                          
+
+    @*I will have to put in an ID for the item karya*@
+    <div class="container" style="padding-top:30px">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div style="padding-bottom:30px">
+                            <select class="browser-default custom-select" id="categoryDrop" onchange="getCategoryList()">
+                                <option selected>All News</option>
+                                <option value="1">Software Development</option>
+                                <option value="2">Data Science</option>
+                                <option value="3">SSIS</option>
+                                <option value="1">Database</option>
+                                <option value="2">Intergration</option>
+                                <option value="3">Artificial Intelligence</option>
+                                <option value="1">Cryptocurrency</option>
+                                <option value="2">Social Media Development</option>
+                                <option value="3">Mobile Development</option>
+                                <option value="1">Web Development</option>
+                                <option value="2">Applications Development</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h5 id="myTime" class="text-muted"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                
+                @*<div id="myTitle">
+                </div>*@
+                <div class="masonry" id="myDiv">
+                </div>
+                <div class="loader" id="progress" style="display:none"></div>
+            </div>
+            @*<div class="col-md-2" style="position:sticky">
+                <div class="row">
+                    <h3>Categories</h3>
+                    <div class="btn-group-vertical" style="padding-top:13px;width:180px">
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="All News" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Software Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Data Science" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="SSIS" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Database" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Intergration" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Artificial Intelligence" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Cryptocurrency" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Enterprise Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Social Media Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Mobile Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Web Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Applications Development" />
+                    </div>
+                    <div style="padding-top:20px">
+                        <h3>Top Stories</h3>
+                        <p>
+                            This is where a list of the top trending stories will be!!
+                        </p>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+
+}

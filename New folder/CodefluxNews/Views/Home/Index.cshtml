@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+@model IEnumerable<CodefluxNews.Models.NewsCategory>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getInfinite();
+            callInitialView();
+            getCategoryList();
+
+
+        function getCategoryList() {
+            $('input:button').click(function () {
+            var category = $(this).val();
+            $('#myDiv').empty();
+            //JSON data
+            var url = '@Url.Content("~/")' + "Home/GetCategory";
+            var dataType = 'application/json; charset=utf-8';
+            var data = { 'Category': category };
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                contentType: dataType,
+                data: data,
+                success: function (result) {
+                    for (var count = 0; count < result.length; count++) {
+                        getInfinite();
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<img src="' + result[count].Picture + '" width="100%" alt="Image caption"/>'
+                            + '<h4>' + result[count].Title + '</h4>'
+                            + '<p>' + result[count].Summary + '</p>'
+                            
+                            + '<a href="' + result[count].Url + '">View More...</a>'
+                            + '</div>');
+                    }
+
+                    console.log('Data received: ');
+                    console.log(result);
+                }, error: function (error) {
+                    alert("Unable to fetch data at this moment " + error);
+                }
+            });
+        });
+        }
+        
+        function callInitialView() {
+            var url = '@Url.Content("~/")' + "Home/GetCategory";
+            var dataType = 'application/json; charset=utf-8';
+            var data = { 'Category': "0" };
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                contentType: dataType,
+                data: data,
+                success: function (result) {
+
+                   
+                    for (var count = 0; count < result.length; count++) {
+                        getInfinite();
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<img src="' + result[count].Picture + '" width="100%" alt="Card image cap"/>'
+                            + '<h4>'+ result[count].Title +'</h4>'
+                            + '<p>' + result[count].Summary + '</p>'
+                            + '<a href="' + result[count].Url + '">View More...</a>'
+                            + '</div>');
+                    }
+                    console.log('Data received: ');
+                    console.log(result);
+                }, error: function (error) {
+                    console.log("Unable to fetch data at this moment " + error);
+                }
+            });
+        }
+        function getInfinite() {
+
+            $(".karya").slice(16).hide();
+            var mincount = 8;
+            var maxcount = 16;
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 50) {
+                    $(".karya").slice(mincount, maxcount).slideDown(350);
+                    mincount = mincount + 8;
+                    maxcount = maxcount + 16;
+                }
+            });
+        }
+    });
+    </script>
+
+
+    @*I will have to put in an ID for the item karya*@
+    <div class="container" style="padding-top:50px">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="masonry" id="myDiv">
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <h3>Categories</h3>
+                    <div class="btn-group-vertical" style="padding-top:13px;width:180px">
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Software Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Data Science" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Database" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Intergration" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Artificial Intelligence" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Cryptocurrency" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Enterprise Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Social Media Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Mobile Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Web Development" />
+                        <input type="button" class="btn btn-sm btn-outline-secondary" value="Applications Development" />
+                    </div>
+                        <div style="padding-top:20px">
+                            <h3>Top Stories</h3>
+                            <p>
+                                This is where a list of the top trending stories will be!!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        }
