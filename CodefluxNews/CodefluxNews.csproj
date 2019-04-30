@@ -307,6 +307,7 @@
     <Content Include="UploadedImages\Codeflux logo.png" />
     <Content Include="UploadedImages\safrica-small_1024x1024.png" />
     <Content Include="UploadedImages\teslas.jpg" />
+    <Content Include="UploadedImages\Up - Arrow.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

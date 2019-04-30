@@ -1,24 +1,60 @@
 ﻿var pageSize = 10;
 var pageIndex = 0;
-var pageIndex2 = 0;
 
-//when page loads
-getSimilarCategory();
+var canISendRequest = true;
+
+//$(window).scroll(function () {
+//    if ($(window).scrollTop() ===
+//        $(document).height() - $(window).height()) {
+//        if (canISendRequest) {
+//            getSimilarCategory();
+//            resizeAllGridItems();
+//            imagesHaveLoaded();
+//        }
+//        else {
+//            $(".noContent").show();
+//            cannotSendRequest();
+//        }
+//    }
+//});
 
 $(window).scroll(function () {
-    if ($(window).scrollTop() ===
-        $(document).height() - $(window).height()) {
-        getSimilarCategory();
-        resizeAllGridItems();
-        imagesHaveLoaded();
+    scrollFunction();
+    if (canISendRequest) {
+        if ($(window).scrollTop() ===
+            $(document).height() - $(window).height()) {
+            getSimilarCategory();
+            resizeAllGridItems();
+            imagesHaveLoaded();
+        }
+    }
+    else {
+        $(".noContent").show();
+        cannotSendRequest();
     }
 });
 
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
+    getSimilarCategory();
     resizeAllGridItems();
     imagesHaveLoaded();
 });
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+//check the condition of the page
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
 
 function getChangedCategory(catDropped) {
     return categoryDrop.options[categoryDrop.selectedIndex].innerHTML;
@@ -44,13 +80,10 @@ function monthName (dt) {
 
 function getSimilarCategory() {
 
-    //var category = $('#myTitle').val();
-
     //JSON data
-    resetIndex();
     var url = "Home/GetCategory";
     var dataType = 'application/json; charset=utf-8';
-    var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex2, "pagesize": pageSize };
+    var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex, "pagesize": pageSize };
     $.ajax({
         type: 'GET',
         url: url,
@@ -59,44 +92,48 @@ function getSimilarCategory() {
         data: data,
         success: function (result) {
 
-            for (var count = 0; count < result.length; count++) {
-                //getInfinite();
-                resizeAllGridItems();
-                imagesHaveLoaded();
-                if (result[count].Picture !== null) {
-                    $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                        + '<div class="content">'
+            if (result.length !== 0) {
+                $(".noContent").hide();
+                canSendRequest();
+                for (var count = 0; count < result.length; count++) {
+                    //getInfinite();
+                    resizeAllGridItems();
+                    imagesHaveLoaded();
+                    if (result[count].Picture !== null) {
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<div class="content">'
 
-                        + '<img src="' + result[count].Picture + '" width="100%" />'
-                        + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
-                        + '<h4>' + result[count].Title + '</h4>'
+                            + '<img src="' + result[count].Picture + '" width="100%" />'
+                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<h4>' + result[count].Title + '</h4>'
 
-                        + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                        + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
 
-                        + '</div>'
-                        + '</div>');
+                            + '</div>'
+                            + '</div>');
+                    }
+                    else {
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<div class="content">'
+                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<h4>' + result[count].Title + '</h4>'
+                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '</div>'
+                            + '</div>');
+                    }
                 }
-                else {
-                    $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                        + '<div class="content">'
+                pageIndex += 1;
 
-
-                        + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
-                        + '<h4>' + result[count].Title + '</h4>'
-
-                        + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                        + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
-
-                        + '</div>'
-                        + '</div>');
-
-                }
+                console.log('Data received: ');
+                console.log(result);
             }
-            pageIndex2 += 1;
+            else {
+                $(".noContent").show();
+                cannotSendRequest();
 
-            console.log('Data received: ');
-            console.log(result);
+            }
         },
         beforeSend: function () {
             $("#progress").show();
@@ -110,15 +147,12 @@ function getSimilarCategory() {
 }
 
 function getCategoryList() {
-    
+    resetIndex();
     $('#myDiv').empty();
     //JSON data
-    resetIndex();
-    resetIndex2();
-
     var url = "Home/GetCategory";
     var dataType = 'application/json; charset=utf-8';
-    var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex2, "pagesize": pageSize };
+    var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex, "pagesize": pageSize };
     $.ajax({
         type: 'GET',
         url: url,
@@ -127,42 +161,47 @@ function getCategoryList() {
         data: data,
         success: function (result) {
 
-            for (var count = 0; count < result.length; count++) {
-                
-                resizeAllGridItems();
-                imagesHaveLoaded();
-                if (result[count].Picture !== null) {
-                    $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                        + '<div class="content">'
-                        + '<img src="' + result[count].Picture + '" width="100%" />'
-                        + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
-                        + '<h4>' + result[count].Title + '</h4>'
+            if (result.length !== 0) {
+                $(".noContent").hide();
+                canSendRequest();
+                for (var count = 0; count < result.length; count++) {
+                    //getInfinite();
+                    resizeAllGridItems();
+                    imagesHaveLoaded();
+                    if (result[count].Picture !== null) {
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<div class="content">'
 
-                        + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                        + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '<img src="' + result[count].Picture + '" width="100%" />'
+                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<h4>' + result[count].Title + '</h4>'
 
-                        + '</div>'
-                        + '</div>');
+                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+
+                            + '</div>'
+                            + '</div>');
+                    }
+                    else {
+                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                            + '<div class="content">'
+                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<h4>' + result[count].Title + '</h4>'
+                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '</div>'
+                            + '</div>');
+                    }
                 }
-                else {
-                    $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                        + '<div class="content">'
+                pageIndex += 1;
 
-                        + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
-                        + '<h4>' + result[count].Title + '</h4>'
-
-                        + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                        + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
-
-                        + '</div>'
-                        + '</div>');
-                }
-
+                console.log('Data received: ');
+                console.log(result);
             }
-            pageIndex2 += 1;
-
-            console.log('Data received: ');
-            console.log(result);
+            else {
+                $(".noContent").show();
+                cannotSendRequest();
+            }
         },
         beforeSend: function () {
             $("#progress").show();
@@ -173,6 +212,14 @@ function getCategoryList() {
             console.log("Unable to fetch data at this moment " + error);
         }
     });
+}
+
+function cannotSendRequest() {
+    return canISendRequest = false;
+}
+
+function canSendRequest() {
+    return canISendRequest = true;
 }
 
 function mySubstring(str) {
