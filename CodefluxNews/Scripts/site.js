@@ -3,21 +3,6 @@ var pageIndex = 0;
 
 var canISendRequest = true;
 
-//$(window).scroll(function () {
-//    if ($(window).scrollTop() ===
-//        $(document).height() - $(window).height()) {
-//        if (canISendRequest) {
-//            getSimilarCategory();
-//            resizeAllGridItems();
-//            imagesHaveLoaded();
-//        }
-//        else {
-//            $(".noContent").show();
-//            cannotSendRequest();
-//        }
-//    }
-//});
-
 $(window).scroll(function () {
     scrollFunction();
     if (canISendRequest) {
@@ -34,8 +19,12 @@ $(window).scroll(function () {
     }
 });
 
+//var nownow = "1555970400000";
+
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
+    //this.console.log(properDate("/Date(1555970400000)/"));
+    //this.console.log(nownow.getDate());
     getSimilarCategory();
     resizeAllGridItems();
     imagesHaveLoaded();
@@ -104,22 +93,25 @@ function getSimilarCategory() {
                             + '<div class="content">'
 
                             + '<img src="' + result[count].Picture + '" width="100%" />'
-                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+
                             + '<h4>' + result[count].Title + '</h4>'
 
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
-
+                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
+                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
+                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
+                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
+                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
                     }
@@ -173,22 +165,25 @@ function getCategoryList() {
                             + '<div class="content">'
 
                             + '<img src="' + result[count].Picture + '" width="100%" />'
-                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            
                             + '<h4>' + result[count].Title + '</h4>'
 
-                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
-
+                            + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
+                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
+                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-                            + '<p style="font-weight:bold;color:#02D21C;font-size:10px">' + result[count].CategoryName + '</p>'
+                            
                             + '<h4>' + result[count].Title + '</h4>'
-                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + 'Source:' + '</p>' + '<p style="font-weight:bold;color:#add8e6;">' + result[count].Name + '</p>'
+                            + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
+                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
+                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
                     }
@@ -212,6 +207,10 @@ function getCategoryList() {
             console.log("Unable to fetch data at this moment " + error);
         }
     });
+}
+
+function properDate(str) {
+    return str.replace(/[#_/Date()]/g, '');
 }
 
 function cannotSendRequest() {
