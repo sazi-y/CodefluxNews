@@ -23,7 +23,7 @@ $(window).scroll(function () {
 
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
-    //this.console.log(properDate("/Date(1555970400000)/"));
+    this.console.log(properDate("/Date(1555970400000)/"));
     //this.console.log(nownow.getDate());
     getSimilarCategory();
     resizeAllGridItems();
@@ -67,6 +67,15 @@ function monthName (dt) {
     return mlist[dt];
 }
 
+function properDate(str) {
+    var myDate = str.replace(/[#_/Date()]/g, '');
+    var numberedDate = parseInt(myDate);
+    var theDate = new Date(numberedDate);
+    var ultimateDate = theDate.toGMTString();
+
+    return ultimateDate.substring(0, 11);
+}
+
 function getSimilarCategory() {
 
     //JSON data
@@ -97,8 +106,8 @@ function getSimilarCategory() {
                             + '<h4>' + result[count].Title + '</h4>'
 
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
                             + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
                             + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
@@ -109,8 +118,8 @@ function getSimilarCategory() {
 
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
                             + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
                             + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
@@ -169,8 +178,8 @@ function getCategoryList() {
                             + '<h4>' + result[count].Title + '</h4>'
 
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
                             + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
                             + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
@@ -181,8 +190,8 @@ function getCategoryList() {
                             
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
+                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
                             + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            //+ '<p style="color:#C0C0C0;">' + result[count].CreatedDate + '</p>'
                             + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
                             + '</div>'
                             + '</div>');
@@ -207,10 +216,6 @@ function getCategoryList() {
             console.log("Unable to fetch data at this moment " + error);
         }
     });
-}
-
-function properDate(str) {
-    return str.replace(/[#_/Date()]/g, '');
 }
 
 function cannotSendRequest() {
