@@ -23,8 +23,7 @@ $(window).scroll(function () {
 
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
-    this.console.log(properDate("/Date(1555970400000)/"));
-    //this.console.log(nownow.getDate());
+    
     getSimilarCategory();
     resizeAllGridItems();
     imagesHaveLoaded();
@@ -51,10 +50,6 @@ function getChangedCategory(catDropped) {
 
 function resetIndex() {
     return pageIndex = 0;
-}
-
-function resetIndex2() {
-    return pageIndex2 = 0;
 }
 
 var today = new Date();
@@ -100,11 +95,8 @@ function getSimilarCategory() {
                     if (result[count].Picture !== null) {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-
                             + '<img src="' + result[count].Picture + '" width="100%" />'
-
                             + '<h4>' + result[count].Title + '</h4>'
-
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
                             + '<p>' + properDate(result[count].CreatedDate) + '</p>'
                             + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
@@ -115,7 +107,6 @@ function getSimilarCategory() {
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
                             + '<p>' + properDate(result[count].CreatedDate) + '</p>'

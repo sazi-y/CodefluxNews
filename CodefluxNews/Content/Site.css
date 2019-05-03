@@ -161,50 +161,6 @@ body {
     }
 }
 
-/*@media only screen and (max-width: 600px) and (min-width: 10px) {
-    .masonry {
-        column-count: 1;
-        column-gap: 1em;
-    }
-
-    .col-md-2 {
-        display: none;
-    }
-    .btn {width:100%;}
-}*/
-
-/* Hide/rearrange for smaller screens */
-/*@media screen and (min-width: 767px) {
-    
-    .nav-item {
-        display: none;
-        visibility: hidden;
-    }
-    .btn {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 800px) and (min-width: 601px) {
-    .masonry { 
-        column-count: 2;
-        column-gap: 1em;
-    }
-    .btn {
-        width: 100%;
-    }
-    .col-md-2 {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 1000px) and (min-width: 801px) {
-    .masonry { 
-        column-count: 3;
-        column-gap: 1em;
-    }
-}*/
-
 .btn {
     color:black;
     font-weight:bold;
@@ -212,17 +168,18 @@ body {
 }
 
 h4 {
-    padding-top:10px;
+    padding-top: 10px;
     padding-left: 16px;
     padding-right: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    /*font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
+    /*font-family: 'Concert One';*/
     font-weight: bold;
     font-size: 16px;
 }
 p {
     padding-left: 16px;
     padding-right: 16px;
-    font-family: 'Franklin Gothic';
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     font-size: 13px;
 }
 /* Set width on the form input elements since they're 100% wide by default */
