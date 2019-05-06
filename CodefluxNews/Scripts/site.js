@@ -19,11 +19,9 @@ $(window).scroll(function () {
     }
 });
 
-//var nownow = "1555970400000";
-
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
-    
+
     getSimilarCategory();
     resizeAllGridItems();
     imagesHaveLoaded();
@@ -57,7 +55,7 @@ var dd = today.getDate();
 var mm = today.getMonth();
 var yy = today.getFullYear();
 
-function monthName (dt) {
+function monthName(dt) {
     mlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return mlist[dt];
 }
@@ -93,25 +91,51 @@ function getSimilarCategory() {
                     resizeAllGridItems();
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
-                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                            + '<div class="content">'
-                            + '<img src="' + result[count].Picture + '" width="100%" />'
-                            + '<h4>' + result[count].Title + '</h4>'
-                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
-                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
-                            + '</div>'
-                            + '</div>');
+                        if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
+                            $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                                + '<div class="content">'
+
+                                + '<img src="' + result[count].Picture + '"/>'
+
+                                + '<h4>' + result[count].Title + '</h4>'
+
+                                + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                                + '<div class="noContainer">'
+                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>');
+                        }
+                        else {
+                            $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                                + '<div class="content">'
+
+                                + '<img src="' + result[count].Picture + '" width="100%" />'
+
+                                + '<h4>' + result[count].Title + '</h4>'
+
+                                + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                                + '<div class="noContainer">'
+                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>');
+                        }
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
                             + '<h4>' + result[count].Title + '</h4>'
-                            + '<p>' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
-                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<p>' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                            + '<div class="noContainer">'
+                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                            + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                            + '</div>'
                             + '</div>'
                             + '</div>');
                     }
@@ -161,29 +185,53 @@ function getCategoryList() {
                     resizeAllGridItems();
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
-                        $('#myDiv').append('<div class="item karya" id="ItemsId">'
-                            + '<div class="content">'
+                        if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
+                            $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                                + '<div class="content">'
 
-                            + '<img src="' + result[count].Picture + '" width="100%" />'
-                            
-                            + '<h4>' + result[count].Title + '</h4>'
+                                + '<img src="' + result[count].Picture + '"/>'
 
-                            + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
-                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
-                            + '</div>'
-                            + '</div>');
+                                + '<h4>' + result[count].Title + '</h4>'
+
+                                + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                                + '<div class="noContainer">'
+                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>');
+                        }
+                        else {
+                            $('#myDiv').append('<div class="item karya" id="ItemsId">'
+                                + '<div class="content">'
+
+                                + '<img src="' + result[count].Picture + '" width="100%" />'
+
+                                + '<h4>' + result[count].Title + '</h4>'
+
+                                + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                                + '<div class="noContainer">'
+                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                                + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>');
+                        }
+
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-                            
+
                             + '<h4>' + result[count].Title + '</h4>'
-                            + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a href="' + result[count].Url + '">...More</a>' + '</p>'
-                            + '<p>' + properDate(result[count].CreatedDate) + '</p>'
-                            + '<p style="color:#C0C0C0;">' + result[count].Name + '</p>'
-                            + '<p style="font-weight:bold;color:#C0C0C0;font-size:10px">' + result[count].CategoryName + '</p>'
+                            + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
+                            + '<div class="noContainer">'
+                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
+                            + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
+                            + '</div>'
                             + '</div>'
                             + '</div>');
                     }
@@ -236,7 +284,6 @@ function getInfinite() {
         }
     });
 }
-
 
 //================================================================================================================================
 //resizeAllGridItems();
