@@ -88,7 +88,7 @@
           </Key>
           <Property Name="ArticleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar(max)" />
-          <Property Name="Summary" Type="varchar" MaxLength="50" />
+          <Property Name="Summary" Type="varchar(max)" />
           <Property Name="ProviderId" Type="int" />
           <Property Name="Picture" Type="varchar(max)" />
           <Property Name="Url" Type="varchar(max)" />
@@ -277,7 +277,6 @@
         <Function Name="deleteParentCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="insertAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
@@ -313,6 +312,7 @@
         </Function>
         <Function Name="selectActiveNewsFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="selectNewsArticles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="selectTop8Articles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="updateCountry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="name" Type="varchar" Mode="In" />
@@ -485,7 +485,7 @@
           </Key>
           <Property Name="ArticleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Summary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ProviderId" Type="Int32" />
           <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -739,6 +739,7 @@
             <End Role="NewsFeed" EntitySet="NewsFeeds" />
           </AssociationSet>
           <FunctionImport Name="selectNewsArticles" ReturnType="Collection(NewsDBModel.selectNewsArticles_Result)" />
+          <FunctionImport Name="selectTop8Articles" ReturnType="Collection(NewsDBModel.selectTop8Articles_Result)" />
         </EntityContainer>
         <ComplexType Name="selectActiveNewsFeed_Result">
           <Property Type="Int32" Name="NewsFeedId" Nullable="false" />
@@ -789,6 +790,17 @@
           <Property Type="Int32" Name="ArticleId" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="true" />
           <Property Type="String" Name="Summary" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Picture" Nullable="true" />
+          <Property Type="String" Name="Url" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="selectTop8Articles_Result">
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Summary" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Picture" Nullable="true" />
           <Property Type="String" Name="Url" Nullable="true" />
@@ -970,6 +982,21 @@
           <FunctionImportMapping FunctionImportName="selectNewsArticles" FunctionName="NewsDBModel.Store.selectNewsArticles">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NewsDBModel.selectNewsArticles_Result">
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="selectTop8Articles" FunctionName="NewsDBModel.Store.selectTop8Articles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewsDBModel.selectTop8Articles_Result">
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />

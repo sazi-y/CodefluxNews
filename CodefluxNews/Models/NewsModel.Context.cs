@@ -323,5 +323,10 @@ namespace CodefluxNews.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectNewsArticles_Result>("selectNewsArticles");
         }
+    
+        public virtual ObjectResult<selectTop8Articles_Result> selectTop8Articles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectTop8Articles_Result>("selectTop8Articles");
+        }
     }
 }

@@ -21,7 +21,7 @@ $(window).scroll(function () {
 
 $(window).on('load', function () {
     $('#myTime').append('<p>' + dd + " " + monthName(mm) + " " + yy + '</p>');
-
+    
     getSimilarCategory();
     resizeAllGridItems();
     imagesHaveLoaded();
@@ -60,6 +60,10 @@ function monthName(dt) {
     return mlist[dt];
 }
 
+function properTitle(str) {
+    return str.replace(/[ :'_]/g, '-');
+}
+
 function properDate(str) {
     var myDate = str.replace(/[#_/Date()]/g, '');
     var numberedDate = parseInt(myDate);
@@ -74,6 +78,7 @@ function getSimilarCategory() {
     //JSON data
     var url = "Home/GetCategory";
     var dataType = 'application/json; charset=utf-8';
+    
     var data = { 'Category': getChangedCategory($('#catDropped')), "pageindex": pageIndex, "pagesize": pageSize };
     $.ajax({
         type: 'GET',
@@ -89,11 +94,13 @@ function getSimilarCategory() {
                 for (var count = 0; count < result.length; count++) {
                     //getInfinite();
                     resizeAllGridItems();
+                    var myUrl = "Home/News/" + result[count].ArticleId + "-" + properTitle(result[count].Title);
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
                         if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
+                                + '<a href="' + myUrl +'">'
 
                                 + '<img src="' + result[count].Picture + '"/>'
 
@@ -105,12 +112,14 @@ function getSimilarCategory() {
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
+                                < '</a>'
                                 + '</div>'
                                 + '</div>');
                         }
                         else {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
+                                + '<a href="' + myUrl + '">'
 
                                 + '<img src="' + result[count].Picture + '" width="100%" />'
 
@@ -122,6 +131,7 @@ function getSimilarCategory() {
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
+                                + '</a>'
                                 + '</div>'
                                 + '</div>');
                         }
@@ -129,6 +139,7 @@ function getSimilarCategory() {
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
+                            + '<a href="' + myUrl + '">'
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
@@ -136,6 +147,7 @@ function getSimilarCategory() {
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                             + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
+                            + '</a>'
                             + '</div>'
                             + '</div>');
                     }
@@ -184,11 +196,12 @@ function getCategoryList() {
                     //getInfinite();
                     resizeAllGridItems();
                     imagesHaveLoaded();
+                    var myUrl = "Home/News/" + result[count].ArticleId + "-" + properTitle(result[count].Title);
                     if (result[count].Picture !== null) {
                         if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-
+                                + '<a href="' + myUrl + '">'
                                 + '<img src="' + result[count].Picture + '"/>'
 
                                 + '<h4>' + result[count].Title + '</h4>'
@@ -199,13 +212,14 @@ function getCategoryList() {
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
+                                + '</a>'
                                 + '</div>'
                                 + '</div>');
                         }
                         else {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-
+                                + '<a href="' + myUrl + '">'
                                 + '<img src="' + result[count].Picture + '" width="100%" />'
 
                                 + '<h4>' + result[count].Title + '</h4>'
@@ -216,6 +230,7 @@ function getCategoryList() {
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
+                                + '</a>'
                                 + '</div>'
                                 + '</div>');
                         }
@@ -224,7 +239,7 @@ function getCategoryList() {
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-
+                            + '<a href="' + myUrl + '">'
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
@@ -232,6 +247,7 @@ function getCategoryList() {
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                             + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
+                            + '</a>'
                             + '</div>'
                             + '</div>');
                     }

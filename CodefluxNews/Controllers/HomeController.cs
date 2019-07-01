@@ -18,6 +18,16 @@ namespace CodefluxNews.Controllers
             return View();
         }
 
+        public ActionResult News(string id)
+        {
+            //string reversedTitle = id.Replace("-", " ");
+            var myIdentifier = id.Split('-');
+
+            var newsArticle = _db.selectNewsArticles().Where(x => x.ArticleId == Convert.ToInt32(myIdentifier[0])).FirstOrDefault();
+
+            return View(newsArticle);
+        }
+
         public async Task<JsonResult> GetCategory(string Category, int pageIndex, int pageSize)
         {
             _db.Configuration.ProxyCreationEnabled = false;
@@ -32,6 +42,10 @@ namespace CodefluxNews.Controllers
 
                 return Json(imageCounter,JsonRequestBehavior.AllowGet);
             }
+        }
+        public ActionResult _PartialNews()
+        {
+            return View(_db.selectTop8Articles().OrderByDescending(x => x.ArticleId).ToList());
         }
     }
 }
