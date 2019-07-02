@@ -31,12 +31,12 @@
                         <div class="timeHandler">
                             <h5 id="myNewTime" class="text-muted">@Model.CreatedDate</h5>
                         </div>
-                        &nbsp;| &nbsp;<a href="@Model.Url">View Full Article</a>
+                        &nbsp;| &nbsp;<a href="@Model.Url" target="_blank">View Full Article</a>
                     </div>
                     <br />
                     @if (!string.IsNullOrEmpty(Model.Picture))
                     {
-                        <img src="@Model.Picture" alt="img" class="img-thumbnail" />
+                        <img src="@Model.Picture" alt="new image" class="img-thumbnail" />
                     }
                     <h4 style="margin-top:30px">
                         @Model.Summary

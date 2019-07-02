@@ -61,7 +61,7 @@ function monthName(dt) {
 }
 
 function properTitle(str) {
-    return str.replace(/[ :'_]/g, '-');
+    return str.replace(/[ :'_,]/g, '-');
 }
 
 function properDate(str) {
@@ -108,7 +108,7 @@ function getSimilarCategory() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
@@ -127,7 +127,7 @@ function getSimilarCategory() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
@@ -143,7 +143,7 @@ function getSimilarCategory() {
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
-                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            + '<h6>' + result[count].CreatedDate + '</h6>'
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                             + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
@@ -154,8 +154,8 @@ function getSimilarCategory() {
                 }
                 pageIndex += 1;
 
-                console.log('Data received: ');
-                console.log(result);
+                //console.log('Data received: ');
+                //console.log(result);
             }
             else {
                 $(".noContent").show();
@@ -208,7 +208,7 @@ function getCategoryList() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
@@ -226,7 +226,7 @@ function getCategoryList() {
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
-                                + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                                + '<h6>' + result[count].CreatedDate + '</h6>'
                                 + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                                 + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                                 + '</div>'
@@ -243,7 +243,7 @@ function getCategoryList() {
                             + '<h4>' + result[count].Title + '</h4>'
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
-                            + '<h6>' + properDate(result[count].CreatedDate) + '</h6>'
+                            + '<h6>' + result[count].CreatedDate + '</h6>'
                             + '<h6 style="color:#808080;">' + result[count].Name + '</h6>'
                             + '<h6 style="font-weight:bold;color:#808080;font-size:10px">' + result[count].CategoryName + '</h6>'
                             + '</div>'
@@ -300,7 +300,6 @@ function getInfinite() {
         }
     });
 }
-
 //================================================================================================================================
 //resizeAllGridItems();
 imagesHaveLoaded();

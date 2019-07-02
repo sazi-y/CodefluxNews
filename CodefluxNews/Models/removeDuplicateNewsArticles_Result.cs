@@ -11,16 +11,16 @@ namespace CodefluxNews.Models
 {
     using System;
     
-    public partial class selectNewsArticles_Result
+    public partial class removeDuplicateNewsArticles_Result
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> ProviderId { get; set; }
         public string Picture { get; set; }
         public string Url { get; set; }
-        public string CreatedDate { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> Active { get; set; }
-        public string CategoryName { get; set; }
     }
 }

@@ -188,6 +188,7 @@
     <Compile Include="Controllers\NewsFeedController.cs" />
     <Compile Include="Controllers\NewsProviderController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\TopArticlesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,6 +244,9 @@
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ParentCategory.cs">
+      <DependentUpon>NewsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\removeDuplicateNewsArticles_Result.cs">
       <DependentUpon>NewsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\selectActiveNewsFeed_Result.cs">
@@ -314,6 +318,7 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\site2.js" />
     <Content Include="UploadedImages\china.png" />
     <Content Include="UploadedImages\Codeflux logo.png" />
     <Content Include="UploadedImages\safrica-small_1024x1024.png" />
@@ -379,6 +384,7 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\_PartialNews.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\TopArticles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

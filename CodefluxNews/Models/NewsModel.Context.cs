@@ -36,9 +36,9 @@ namespace CodefluxNews.Models
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<NewsArticle> NewsArticles { get; set; }
         public virtual DbSet<NewsCategory> NewsCategories { get; set; }
+        public virtual DbSet<NewsFeed> NewsFeeds { get; set; }
         public virtual DbSet<NewsProvider> NewsProviders { get; set; }
         public virtual DbSet<ParentCategory> ParentCategories { get; set; }
-        public virtual DbSet<NewsFeed> NewsFeeds { get; set; }
     
         public virtual int deleteCountry(Nullable<int> id)
         {
@@ -205,9 +205,24 @@ namespace CodefluxNews.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertParentCategory", parentnameParameter);
         }
     
+        public virtual ObjectResult<removeDuplicateNewsArticles_Result> removeDuplicateNewsArticles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<removeDuplicateNewsArticles_Result>("removeDuplicateNewsArticles");
+        }
+    
         public virtual ObjectResult<selectActiveNewsFeed_Result> selectActiveNewsFeed()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectActiveNewsFeed_Result>("selectActiveNewsFeed");
+        }
+    
+        public virtual ObjectResult<selectNewsArticles_Result> selectNewsArticles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectNewsArticles_Result>("selectNewsArticles");
+        }
+    
+        public virtual ObjectResult<selectTop8Articles_Result> selectTop8Articles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectTop8Articles_Result>("selectTop8Articles");
         }
     
         public virtual int updateCountry(Nullable<int> id, string name, string logo)
@@ -317,16 +332,6 @@ namespace CodefluxNews.Models
                 new ObjectParameter("countryId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateNewsProvider", idParameter, nameParameter, urlParameter, countryIdParameter);
-        }
-    
-        public virtual ObjectResult<selectNewsArticles_Result> selectNewsArticles()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectNewsArticles_Result>("selectNewsArticles");
-        }
-    
-        public virtual ObjectResult<selectTop8Articles_Result> selectTop8Articles()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectTop8Articles_Result>("selectTop8Articles");
         }
     }
 }
