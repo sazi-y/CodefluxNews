@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NewsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NewsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -95,6 +95,8 @@
           <Property Name="CategoryId" Type="int" />
           <Property Name="CreatedDate" Type="date" />
           <Property Name="Active" Type="bit" />
+          <Property Name="SEOURL" Type="varchar(max)" />
+          <Property Name="VisitCount" Type="int" />
         </EntityType>
         <EntityType Name="NewsCategory">
           <Key>
@@ -345,7 +347,7 @@
           <Parameter Name="url" Type="varchar" Mode="In" />
           <Parameter Name="countryId" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="NewsModelStoreContainer">
+        <EntityContainer Name="NewsDBModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -400,11 +402,10 @@
             <End Role="NewsProvider" EntitySet="NewsProvider" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NewsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NewsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -494,6 +495,8 @@
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="SEOURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VisitCount" Type="Int32" />
           <NavigationProperty Name="NewsCategory" Relationship="Self.FK_NewsArticle_NewsCategory" FromRole="NewsArticle" ToRole="NewsCategory" />
           <NavigationProperty Name="NewsProvider" Relationship="Self.FK_NewsArticle_NewsProvider" FromRole="NewsArticle" ToRole="NewsProvider" />
         </EntityType>
@@ -695,22 +698,22 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="deleteCountry">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="deleteNewsArticle">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="deleteNewsCategory">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="deleteNewsFeed">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="deleteNewsProvider">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="deleteParentCategory">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="insertAdmin">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -743,12 +746,12 @@
             <Parameter Name="countryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="insertParentCategory">
-            <Parameter Name="parentname" Mode="In" Type="String" />
+          <Parameter Name="parentname" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="removeDuplicateNewsArticles" ReturnType="Collection(NewsModel.removeDuplicateNewsArticles_Result)" />
-          <FunctionImport Name="selectActiveNewsFeed" ReturnType="Collection(NewsModel.selectActiveNewsFeed_Result)" />
-          <FunctionImport Name="selectNewsArticles" ReturnType="Collection(NewsModel.selectNewsArticles_Result)" />
-          <FunctionImport Name="selectTop8Articles" ReturnType="Collection(NewsModel.selectTop8Articles_Result)" />
+          <FunctionImport Name="removeDuplicateNewsArticles" ReturnType="Collection(NewsDBModel.removeDuplicateNewsArticles_Result)" />
+          <FunctionImport Name="selectActiveNewsFeed" ReturnType="Collection(NewsDBModel.selectActiveNewsFeed_Result)" />
+          <FunctionImport Name="selectNewsArticles" ReturnType="Collection(NewsDBModel.selectNewsArticles_Result)" />
+          <FunctionImport Name="selectTop8Articles" ReturnType="Collection(NewsDBModel.selectTop8Articles_Result)" />
           <FunctionImport Name="updateCountry">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="name" Mode="In" Type="String" />
@@ -791,6 +794,8 @@
           <Property Type="Int32" Name="CategoryId" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="String" Name="SEOURL" Nullable="true" />
+          <Property Type="Int32" Name="VisitCount" Nullable="true" />
         </ComplexType>
         <ComplexType Name="selectActiveNewsFeed_Result">
           <Property Type="Int32" Name="NewsFeedId" Nullable="false" />
@@ -806,6 +811,7 @@
           <Property Type="String" Name="Summary" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Picture" Nullable="true" />
+          <Property Type="String" Name="SEOURL" Nullable="true" />
           <Property Type="String" Name="Url" Nullable="true" />
           <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="4000" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
@@ -827,9 +833,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NewsModelStoreContainer" CdmEntityContainer="NewsDBEntities">
+        <EntityContainerMapping StorageEntityContainer="NewsDBModelStoreContainer" CdmEntityContainer="NewsDBEntities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="NewsModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="NewsDBModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -839,7 +845,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="NewsModel.Admin">
+            <EntityTypeMapping TypeName="NewsDBModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
                 <ScalarProperty Name="AdminId" ColumnName="AdminId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -848,7 +854,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="NewsModel.AspNetRole">
+            <EntityTypeMapping TypeName="NewsDBModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -856,7 +862,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="NewsModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="NewsDBModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -866,7 +872,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="NewsModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="NewsDBModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -875,7 +881,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="NewsModel.AspNetUser">
+            <EntityTypeMapping TypeName="NewsDBModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -893,7 +899,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="NewsModel.Country">
+            <EntityTypeMapping TypeName="NewsDBModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CountryName" ColumnName="CountryName" />
@@ -902,7 +908,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NewsArticles">
-            <EntityTypeMapping TypeName="NewsModel.NewsArticle">
+            <EntityTypeMapping TypeName="NewsDBModel.NewsArticle">
               <MappingFragment StoreEntitySet="NewsArticle">
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -913,11 +919,13 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SEOURL" ColumnName="SEOURL" />
+                <ScalarProperty Name="VisitCount" ColumnName="VisitCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NewsCategories">
-            <EntityTypeMapping TypeName="NewsModel.NewsCategory">
+            <EntityTypeMapping TypeName="NewsDBModel.NewsCategory">
               <MappingFragment StoreEntitySet="NewsCategory">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -926,7 +934,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NewsFeeds">
-            <EntityTypeMapping TypeName="NewsModel.NewsFeed">
+            <EntityTypeMapping TypeName="NewsDBModel.NewsFeed">
               <MappingFragment StoreEntitySet="NewsFeed">
                 <ScalarProperty Name="NewsFeedId" ColumnName="NewsFeedId" />
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
@@ -938,7 +946,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NewsProviders">
-            <EntityTypeMapping TypeName="NewsModel.NewsProvider">
+            <EntityTypeMapping TypeName="NewsDBModel.NewsProvider">
               <MappingFragment StoreEntitySet="NewsProvider">
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -948,14 +956,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ParentCategories">
-            <EntityTypeMapping TypeName="NewsModel.ParentCategory">
+            <EntityTypeMapping TypeName="NewsDBModel.ParentCategory">
               <MappingFragment StoreEntitySet="ParentCategory">
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="ParentName" ColumnName="ParentName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="NewsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="NewsDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
@@ -963,22 +971,22 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="deleteCountry" FunctionName="NewsModel.Store.deleteCountry" />
-          <FunctionImportMapping FunctionImportName="deleteNewsArticle" FunctionName="NewsModel.Store.deleteNewsArticle" />
-          <FunctionImportMapping FunctionImportName="deleteNewsCategory" FunctionName="NewsModel.Store.deleteNewsCategory" />
-          <FunctionImportMapping FunctionImportName="deleteNewsFeed" FunctionName="NewsModel.Store.deleteNewsFeed" />
-          <FunctionImportMapping FunctionImportName="deleteNewsProvider" FunctionName="NewsModel.Store.deleteNewsProvider" />
-          <FunctionImportMapping FunctionImportName="deleteParentCategory" FunctionName="NewsModel.Store.deleteParentCategory" />
-          <FunctionImportMapping FunctionImportName="insertAdmin" FunctionName="NewsModel.Store.insertAdmin" />
-          <FunctionImportMapping FunctionImportName="insertCountry" FunctionName="NewsModel.Store.insertCountry" />
-          <FunctionImportMapping FunctionImportName="insertNewsArticle" FunctionName="NewsModel.Store.insertNewsArticle" />
-          <FunctionImportMapping FunctionImportName="insertNewsCategory" FunctionName="NewsModel.Store.insertNewsCategory" />
-          <FunctionImportMapping FunctionImportName="insertNewsFeed" FunctionName="NewsModel.Store.insertNewsFeed" />
-          <FunctionImportMapping FunctionImportName="insertNewsProvider" FunctionName="NewsModel.Store.insertNewsProvider" />
-          <FunctionImportMapping FunctionImportName="insertParentCategory" FunctionName="NewsModel.Store.insertParentCategory" />
-          <FunctionImportMapping FunctionImportName="removeDuplicateNewsArticles" FunctionName="NewsModel.Store.removeDuplicateNewsArticles">
+          <FunctionImportMapping FunctionImportName="deleteCountry" FunctionName="NewsDBModel.Store.deleteCountry" />
+          <FunctionImportMapping FunctionImportName="deleteNewsArticle" FunctionName="NewsDBModel.Store.deleteNewsArticle" />
+          <FunctionImportMapping FunctionImportName="deleteNewsCategory" FunctionName="NewsDBModel.Store.deleteNewsCategory" />
+          <FunctionImportMapping FunctionImportName="deleteNewsFeed" FunctionName="NewsDBModel.Store.deleteNewsFeed" />
+          <FunctionImportMapping FunctionImportName="deleteNewsProvider" FunctionName="NewsDBModel.Store.deleteNewsProvider" />
+          <FunctionImportMapping FunctionImportName="deleteParentCategory" FunctionName="NewsDBModel.Store.deleteParentCategory" />
+          <FunctionImportMapping FunctionImportName="insertAdmin" FunctionName="NewsDBModel.Store.insertAdmin" />
+          <FunctionImportMapping FunctionImportName="insertCountry" FunctionName="NewsDBModel.Store.insertCountry" />
+          <FunctionImportMapping FunctionImportName="insertNewsArticle" FunctionName="NewsDBModel.Store.insertNewsArticle" />
+          <FunctionImportMapping FunctionImportName="insertNewsCategory" FunctionName="NewsDBModel.Store.insertNewsCategory" />
+          <FunctionImportMapping FunctionImportName="insertNewsFeed" FunctionName="NewsDBModel.Store.insertNewsFeed" />
+          <FunctionImportMapping FunctionImportName="insertNewsProvider" FunctionName="NewsDBModel.Store.insertNewsProvider" />
+          <FunctionImportMapping FunctionImportName="insertParentCategory" FunctionName="NewsDBModel.Store.insertParentCategory" />
+          <FunctionImportMapping FunctionImportName="removeDuplicateNewsArticles" FunctionName="NewsDBModel.Store.removeDuplicateNewsArticles">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NewsModel.removeDuplicateNewsArticles_Result">
+              <ComplexTypeMapping TypeName="NewsDBModel.removeDuplicateNewsArticles_Result">
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
@@ -988,12 +996,14 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SEOURL" ColumnName="SEOURL" />
+                <ScalarProperty Name="VisitCount" ColumnName="VisitCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="selectActiveNewsFeed" FunctionName="NewsModel.Store.selectActiveNewsFeed">
+          <FunctionImportMapping FunctionImportName="selectActiveNewsFeed" FunctionName="NewsDBModel.Store.selectActiveNewsFeed">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NewsModel.selectActiveNewsFeed_Result">
+              <ComplexTypeMapping TypeName="NewsDBModel.selectActiveNewsFeed_Result">
                 <ScalarProperty Name="NewsFeedId" ColumnName="NewsFeedId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="RssUrl" ColumnName="RssUrl" />
@@ -1003,9 +1013,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="selectNewsArticles" FunctionName="NewsModel.Store.selectNewsArticles">
+          <FunctionImportMapping FunctionImportName="selectNewsArticles" FunctionName="NewsDBModel.Store.selectNewsArticles">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NewsModel.selectNewsArticles_Result">
+              <ComplexTypeMapping TypeName="NewsDBModel.selectNewsArticles_Result">
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="SEOURL" ColumnName="SEOURL" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="selectTop8Articles" FunctionName="NewsDBModel.Store.selectTop8Articles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewsDBModel.selectTop8Articles_Result">
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
@@ -1018,26 +1044,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="selectTop8Articles" FunctionName="NewsModel.Store.selectTop8Articles">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="NewsModel.selectTop8Articles_Result">
-                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="updateCountry" FunctionName="NewsModel.Store.updateCountry" />
-          <FunctionImportMapping FunctionImportName="updateNewsArticle" FunctionName="NewsModel.Store.updateNewsArticle" />
-          <FunctionImportMapping FunctionImportName="updateNewsCategory" FunctionName="NewsModel.Store.updateNewsCategory" />
-          <FunctionImportMapping FunctionImportName="updateNewsFeed" FunctionName="NewsModel.Store.updateNewsFeed" />
-          <FunctionImportMapping FunctionImportName="updateNewsProvider" FunctionName="NewsModel.Store.updateNewsProvider" />
+          <FunctionImportMapping FunctionImportName="updateCountry" FunctionName="NewsDBModel.Store.updateCountry" />
+          <FunctionImportMapping FunctionImportName="updateNewsArticle" FunctionName="NewsDBModel.Store.updateNewsArticle" />
+          <FunctionImportMapping FunctionImportName="updateNewsCategory" FunctionName="NewsDBModel.Store.updateNewsCategory" />
+          <FunctionImportMapping FunctionImportName="updateNewsFeed" FunctionName="NewsDBModel.Store.updateNewsFeed" />
+          <FunctionImportMapping FunctionImportName="updateNewsProvider" FunctionName="NewsDBModel.Store.updateNewsProvider" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

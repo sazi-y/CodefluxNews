@@ -50,7 +50,7 @@ body {
 }
 
 .footer {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     width: 100%;
     white-space: nowrap;
@@ -126,8 +126,14 @@ body {
     }
 }
 
-@media screen and (min-width: 767px) {
+@media only screen and (max-width: 991px) {
 
+    .thePartialView {
+        display:none;
+    }
+}
+
+@media screen and (min-width: 767px) {
     .nav-item {
         display: none;
         visibility: hidden;
@@ -188,6 +194,17 @@ h6 {
 
 a {
     color: #5d5d5d;
+}
+
+a:hover {
+    color: #02D21C;
+}
+
+.HoverTitle:hover {
+    color: #02D21C;
+}
+.singleSummary {
+    font-weight:100;
 }
 
 p {

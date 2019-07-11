@@ -2,13 +2,13 @@
 
 @{ Layout = "";}
 
-<h3>Top Stories</h3>
+<h3 style="color:#02D21C;">Top Stories</h3>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-4" style="padding:10px">
-                <img src="@item.Picture" class="img-thumbnail" />
+                <img src="@item.Picture" class="img-thumbnail border-0" />
             </div>
             <div class="col-8" style="padding:10px">
                 <p>@item.Title</p>

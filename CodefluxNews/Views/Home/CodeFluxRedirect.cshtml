@@ -1,0 +1,19 @@
+﻿@model CodefluxNews.Models.NewsArticle
+
+@{
+    ViewBag.Title = "CodeFluxRedirect";
+    Layout = "~/Views/Shared/_PopUpLayout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="~/Scripts/newsScript.js"></script>
+<link href="~/Content/Site2.css" rel="stylesheet" />
+
+@*<h2>CodeFluxRedirect has definately loaded Bruh!</h2>*@
+<div class="divTable">
+    <img class="flashImage" src="~/Content/PNG-File.png" />
+    <input type="hidden" id="myIdentifier" value="@Model.Url" />
+    <input type="hidden" id="myIdentifier2" value="@Model.ArticleId" />
+</div>

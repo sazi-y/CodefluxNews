@@ -1,5 +1,4 @@
-﻿@model CodefluxNews.Models.selectNewsArticles_Result
-@*@using IEnumerable<CodefluxNews.Models.selectNewsArticles_Result>*@
+﻿@model CodefluxNews.Models.NewsArticle
 
 @{
     ViewBag.Title = "News";
@@ -9,36 +8,28 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
 <script src="~/Scripts/moment.js"></script>
-@*<h2>Details</h2>*@
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var myDate = $("#myNewTime").text();
-        $('.timeHandler').empty();
-        $('.timeHandler').append('<h5 id="myNewTime" class="text-muted">' + moment(myDate).fromNow() + '</h5>');
-        $();
-    });
-</script>
+<script src="~/Scripts/newsScript.js"></script>
 
 <div class="container" style="margin-top:20px;">
     <div class="container" style="padding:20px;">
         <div class="row">
-            <div class="col-8">
+            <div class="col-lg-8 col-md-12 col-sm-12">
                 <div>
                     <h3>@Model.Title</h3>
+                    <input type="hidden" id="myArticleForPopUp" value="@Model.Url" />
                     <br />
                     <div class="btn-group" style="padding:15px">
                         <div class="timeHandler">
                             <h5 id="myNewTime" class="text-muted">@Model.CreatedDate</h5>
                         </div>
-                        &nbsp;| &nbsp;<a href="@Model.Url" target="_blank">View Full Article</a>
+                        &nbsp;| &nbsp;<a href="@Url.Action("redirect","technology",new { id = Model.ArticleId })" @*onclick="showFluxPopupLogo()"*@ target="_blank">View Full Article</a>
                     </div>
                     <br />
                     @if (!string.IsNullOrEmpty(Model.Picture))
                     {
-                        <img src="@Model.Picture" alt="new image" class="img-thumbnail" />
+                        <img src="@Model.Picture" alt="new image" class="img-thumbnail border-0" />
                     }
-                    <h4 style="margin-top:30px">
+                    <h4 class="singleSummary" style="margin-top:30px">
                         @Model.Summary
                     </h4>
                 </div>
@@ -46,19 +37,23 @@
                     <div class="col-2">
                     </div>
                     <div class="col-md-8">
-                        <di class="btn-group">
+                        @*<di class="btn-group">
                             <img src="~/Content/facebook_logo_RGB-Hex-Blue_512.png" width="40" />&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="~/Content/linkedIn_logo_PNG38.png" width="40" />&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="~/Content/twitter_logo.png" width="40" />
-                        </di>
+                        </di>*@
                     </div>
                     <div class="col-2">
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 thePartialView">
                 @Html.Action("_PartialNews", new List<CodefluxNews.Models.selectTop8Articles_Result>())
             </div>
         </div>
     </div>
 </div>
+<hr style="bottom:0;" />
+<footer>
+    <p>&copy; @DateTime.Now.Year - Codeflux News</p>
+</footer>

@@ -18,6 +18,7 @@ namespace CodefluxNews.Models
         public string Summary { get; set; }
         public string Name { get; set; }
         public string Picture { get; set; }
+        public string SEOURL { get; set; }
         public string Url { get; set; }
         public string CreatedDate { get; set; }
         public Nullable<bool> Active { get; set; }

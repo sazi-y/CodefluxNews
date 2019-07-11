@@ -1,0 +1,14 @@
+﻿.HoverTitle {
+    color: #5d5d5d;
+}
+
+.divTable {
+    margin:20% 45%;
+}
+
+@media only screen and (max-width: 800px) {
+
+    .divTable {
+        margin: 20% 25%;
+    }
+}

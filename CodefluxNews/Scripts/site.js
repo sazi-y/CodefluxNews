@@ -94,17 +94,18 @@ function getSimilarCategory() {
                 for (var count = 0; count < result.length; count++) {
                     //getInfinite();
                     resizeAllGridItems();
-                    var myUrl = "Home/News/" + result[count].ArticleId + "-" + properTitle(result[count].Title);
+                    //var myUrl = "Home/News/" + result[count].ArticleId + "-" + properTitle(result[count].Title);
                     imagesHaveLoaded();
                     if (result[count].Picture !== null) {
                         if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-                                + '<a href="' + myUrl +'">'
+                                + '<a style="text-decoration:none;" href="' + result[count].Url +'" target="_blank">'
+                                + '<input type="hidden" id="seoUrl" value="'+ result[count].SEOURL +'"/>'
 
                                 + '<img src="' + result[count].Picture + '"/>'
 
-                                + '<h4>' + result[count].Title + '</h4>'
+                                + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
@@ -119,11 +120,11 @@ function getSimilarCategory() {
                         else {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-                                + '<a href="' + myUrl + '">'
-
+                                + '<a style="text-decoration:none;" href="' + result[count].Url + '" target="_blank">'
+                                + '<input type="hidden" id="seoUrl" value="' + result[count].SEOURL + '"/>'
                                 + '<img src="' + result[count].Picture + '" width="100%" />'
 
-                                + '<h4>' + result[count].Title + '</h4>'
+                                + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
@@ -139,8 +140,9 @@ function getSimilarCategory() {
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-                            + '<a href="' + myUrl + '">'
-                            + '<h4>' + result[count].Title + '</h4>'
+                            + '<a style="text-decoration:none;" href="' + result[count].Url + '" target="_blank">'
+                            + '<input type="hidden" id="seoUrl" value="' + result[count].SEOURL + '"/>'
+                            + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
                             + '<p>' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
                             + '<h6>' + result[count].CreatedDate + '</h6>'
@@ -201,10 +203,11 @@ function getCategoryList() {
                         if (result[count].Name === "CCN" || result[count].Name === "Neuroscience News" || result[count].Name === "Tech republic") {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-                                + '<a href="' + myUrl + '">'
+                                + '<a style="text-decoration:none;" href="' + result[count].Url + '" target="_blank">'
+                                + '<input type="hidden" id="seoUrl" value="' + result[count].SEOURL + '"/>'
                                 + '<img src="' + result[count].Picture + '"/>'
 
-                                + '<h4>' + result[count].Title + '</h4>'
+                                + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
@@ -219,10 +222,11 @@ function getCategoryList() {
                         else {
                             $('#myDiv').append('<div class="item karya" id="ItemsId">'
                                 + '<div class="content">'
-                                + '<a href="' + myUrl + '">'
+                                + '<a style="text-decoration:none;" href="' + result[count].Url + '" target="_blank">'
+                                + '<input type="hidden" id="seoUrl" value="' + result[count].SEOURL + '"/>'
                                 + '<img src="' + result[count].Picture + '" width="100%" />'
 
-                                + '<h4>' + result[count].Title + '</h4>'
+                                + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
 
                                 + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                                 + '<div class="noContainer">'
@@ -234,13 +238,13 @@ function getCategoryList() {
                                 + '</div>'
                                 + '</div>');
                         }
-
                     }
                     else {
                         $('#myDiv').append('<div class="item karya" id="ItemsId">'
                             + '<div class="content">'
-                            + '<a href="' + myUrl + '">'
-                            + '<h4>' + result[count].Title + '</h4>'
+                            + '<a style="text-decoration:none;" href="' + result[count].Url + '" target="_blank">'
+                            + '<input type="hidden" id="seoUrl" value="' + result[count].SEOURL + '"/>'
+                            + '<h4 class="HoverTitle">' + result[count].Title + '</h4>'
                             + '<p style="padding-top:20px">' + mySubstring(result[count].Summary) + '<a style="color:#808080" href="' + result[count].Url + '">...read more</a>' + '</p>'
                             + '<div class="noContainer">'
                             + '<h6>' + result[count].CreatedDate + '</h6>'

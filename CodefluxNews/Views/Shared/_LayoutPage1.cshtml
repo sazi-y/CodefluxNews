@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@*@ViewBag.Title -*@ Codeflux</title>
+    <title>@*@ViewBag.Title -*@ CodeFlux News | Stay up to date with latest technology trends.</title>
+    <meta name="description" content="Codeflx news provides all updates in technology from software development, data science, database, intergration, artificial intelligence, cryptocurrency and mobile development"/>
     <link rel="shortcut icon" href="~/png_file_8VX_icon.ico" type="image/x-icon" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -13,19 +14,16 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" href="@Url.Action("Index","Home",new { })">
-
                     <img src="~/Content/Codeflux logo.png" alt="CodeFlux Logo" /><span style="padding-left:20px; font-weight:bold; ">@*&nbsp;News*@</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-
                         <li class="nav-item">
                             <input type="button" class="btn btn-sm btn-outline-secondary" value="Software Development" />
-
                         </li>
                         <li class="nav-item">
                             <input type="button" class="btn btn-sm btn-outline-secondary" value="Data Science" />
@@ -54,9 +52,8 @@
                         <li class="nav-item">
                             <input type="button" class="btn btn-sm btn-outline-secondary" value="Applications Development" />
                         </li>
-
                     </ul>
-                </div>
+                </div>*@
             </div>
         </nav>
     </header>

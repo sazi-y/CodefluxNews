@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -278,7 +279,9 @@
     <Content Include="Content\facebook_logo_RGB-Hex-Blue_512.png" />
     <Content Include="Content\linkedIn_logo_PNG38.png" />
     <Content Include="Content\login.png" />
+    <Content Include="Content\PNG-File.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Site2.css" />
     <Content Include="Content\twitter_logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -316,6 +319,7 @@
     <Content Include="Scripts\datejs.js" />
     <Content Include="Scripts\jquery.timeago.js" />
     <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\newsScript.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\site2.js" />
@@ -385,9 +389,12 @@
     <Content Include="Views\Home\_PartialNews.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\TopArticles\Index.cshtml" />
+    <Content Include="Views\Home\CodeFluxRedirect.cshtml" />
+    <Content Include="Views\Shared\_PopUpLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Conversation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

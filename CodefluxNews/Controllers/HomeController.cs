@@ -9,32 +9,59 @@ using CodefluxNews.Models;
 
 namespace CodefluxNews.Controllers
 {
+    [RoutePrefix("technology")]
     public class HomeController : Controller
     {
         NewsDBEntities _db = new NewsDBEntities();
+        public bool canRedirectToExternalNewsSource = false;
 
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult News(string id)
+        [Route("news/{id}")]
+        public async Task<ActionResult> News(string id)
         {
-            //string reversedTitle = id.Replace("-", " ");
-            var myIdentifier = id.Split('-');
+            try
+            {
+                var newsArticle = await _db.NewsArticles.Where(x => x.SEOURL == id).FirstOrDefaultAsync();
+                //newsArticle.VisitCount = newsArticle.VisitCount + 1;
+                if (newsArticle.VisitCount == null)
+                    newsArticle.VisitCount = 0;
 
-            var newsArticle = _db.selectNewsArticles().Where(x => x.ArticleId == Convert.ToInt32(myIdentifier[0])).FirstOrDefault();
+                newsArticle.VisitCount++;
 
-            return View(newsArticle);
+                await _db.SaveChangesAsync();
+
+                return View(newsArticle);
+            }
+            catch(Exception ex)
+            {
+                return View(RedirectToAction(nameof(Index)));
+            }
         }
+        public async void IncreaseClickCount(string id)
+        {
+            var newsArticle = await _db.NewsArticles.Where(x => x.SEOURL == id).FirstOrDefaultAsync();
+            if (newsArticle.VisitCount == null)
+                newsArticle.VisitCount = 0;
 
+            newsArticle.VisitCount++;
+
+            await _db.SaveChangesAsync();
+        }
+        [Route("redirect/{id}")]
+        public async Task<ActionResult> CodeFluxRedirect(int id)
+        {
+            return View(await _db.NewsArticles.Where(x => x.ArticleId == id).FirstOrDefaultAsync());
+        }
         public async Task<JsonResult> GetCategory(string Category, int pageIndex, int pageSize)
         {
             _db.Configuration.ProxyCreationEnabled = false;
 
             if (Category == "0"|| Category=="All News")
             {
-                return Json(_db.selectNewsArticles().Skip(pageIndex * pageSize).Take(pageSize).ToList(), JsonRequestBehavior.AllowGet);
+                return Json(_db.selectNewsArticles().OrderByDescending(x => x.CreatedDate).Skip(pageIndex * pageSize).Take(pageSize).ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {

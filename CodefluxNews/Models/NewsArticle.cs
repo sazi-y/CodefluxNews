@@ -23,6 +23,8 @@ namespace CodefluxNews.Models
         public Nullable<int> CategoryId { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<bool> Active { get; set; }
+        public string SEOURL { get; set; }
+        public Nullable<int> VisitCount { get; set; }
     
         public virtual NewsCategory NewsCategory { get; set; }
         public virtual NewsProvider NewsProvider { get; set; }
